@@ -2,4 +2,4 @@
 
 Пример кода на javaScript будет файл JSexample.js <br>
 Пример SQL запросов/процедур будет файл SQL Yii2 syntax example.php <br>
-Пример трудной задачи (код не мой но пришлось в нем разбираться) это ES.php + SiteController.php + catalogue_menu.php + search.php 
+
