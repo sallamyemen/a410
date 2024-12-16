@@ -1,24 +1,13 @@
-// $(".btn").on("click", function() {
-//   $('#modal-pol').modal('hide');
-// });
-// $(".close").on("click", function() {
-//   $('#modal-pol').modal('hide');
-// });
+
 
 $(".btn").on("click", function() {
-  $('#modal-pol').hide();
-  // vdown = true;
-  // console.log('vdown ' + /*typeof*/ vdown); 
+  $('#modal-pol').hide(); 
 });
 
 $("#modal-pol .close").on("click", function() {
   $('#modal-pol').hide();
     setdisc(1);   
 });
-
-// $('#modal-pol').on('show', function(){
-//     $('.modal-backdrop').style.opacity = "0";
-// });
 
 function gettCookie(byname)	// возвращает по имени значение, здесь не используется
    {byname=byname+"=";
@@ -35,12 +24,12 @@ function gettCookie(byname)	// возвращает по имени значен
 
  function parseCookie()   // Разделение cookie
    { var cookieList = document.cookie.split("; ");
-   // Массив для каждого cookie в cookieList
+   
    var cookieArray = new Array();
    for (var i = 0; i < cookieList.length; i++) {
-       // Разделение пар имя-значение.
+       
        var name = cookieList[i].split("=");
-       // Декодирование и добавление в cookie-массив.
+      
        cookieArray[unescape(name[0])] = unescape(name[1]);
     }
    return cookieArray;
@@ -83,13 +72,6 @@ function setdisc(disc) {
                 bval = 86400000;      
             else            
                 bval = 1000;
-        }            
-      
-       // Вывод приветствия, числа посещений и увеличение числа посещений на 1.
-            console.log("Мы снова рады видеть Вас на нашем сайте! Число лично ваших посещений - " + cookies.visits++ + " !");       
-       // Вывод даты последнего посещения.
-            // console.log("Последний раз Вы были у нас на сайте: " + cookies.LastVisit + ".");
-       // Обновление cookie.
-            settCookie(isNaN(cookies.visits)?1:cookies.visits);
-	   
+        }        
+            settCookie(isNaN(cookies.visits)?1:cookies.visits);	   
     }
