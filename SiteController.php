@@ -51,9 +51,7 @@ class SiteController extends Controller
         Yii::$app->params['user'] = (object)[
             'access_level' => 0,
             'guid' => '009e988e-82c4-11ea-8118-bbfd54cdd6d3',
-        ];
-
-       // dd(Yii::$app->controller->action->id); die;
+        ];       
 
         Yii::$app->params['general'] = General::find()->where(['id' => 1])->asArray()->one();
         Yii::$app->params['sitename'] = Yii::$app->params['general']['sitename'];
@@ -76,17 +74,6 @@ class SiteController extends Controller
                 Yii::$app->controller->action->id != 'contact' &&
                 Yii::$app->controller->action->id != 'logout'
             ) {
-
-//                if (!$user->user->application_status) {
-//                    return $this->redirect(Url::to('/personal/application'), [
-//                        'data-method' => 'POST',
-//                        'data-params' => [
-//                            'csrf_param' => \Yii::$app->request->csrfParam,
-//                            'csrf_token' => \Yii::$app->request->csrfToken,
-//                            'reason' => ['status' => 'error', 'msg' => 'Для активации аккаунта, заполните личные данные!']
-//                        ],
-//                    ]);
-//                }
 
                 if (!$user->user->application_status) {
                     Yii::$app->session->setFlash('alertPopup', ['status' => 'error', 'msg' => 'Для активации аккаунта, заполните личные данные!']);
@@ -140,12 +127,6 @@ class SiteController extends Controller
 
         if(isset($redirectList[$query]))
             Yii::$app->response->redirect('https://' . $_SERVER['HTTP_HOST'] . $redirectList[$query], 301)->send();
-
-
-
-
-
-
         return parent::beforeAction($action);
     }
 
@@ -198,8 +179,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-
-
         $this->meta(BH::shortLocCode(Yii::$app->params['general']['meta_title']), Yii::$app->params['general']['meta_description'], Yii::$app->params['general']['meta_keyords']);
         
         $categories = Category::find()->where(['alias' => 'product'])->one();
@@ -224,8 +203,6 @@ class SiteController extends Controller
 
         $hash = md5('doc_' . $model->id);
         $fileHash = explode('_', $name);
-
-
         
         if($hash == $fileHash[0])
         {
@@ -264,10 +241,7 @@ class SiteController extends Controller
     public function actionAccii()
     {
         
-        
-        
-        $currentDateTime = strtotime(BH::td()); //date('d-m-Y H:i:s');
-        //dd($currentDateTime);
+        $currentDateTime = strtotime(BH::td()); //date('d-m-Y H:i:s');       
 
         $query = Accii::find();
 
@@ -292,9 +266,7 @@ class SiteController extends Controller
         $query->andWhere(['in', 'id', $sub]);
           
         $query->orderBy(['id' => SORT_DESC]);
-        $model = $query->all();
-
-        //dd($model);die;
+        $model = $query->all();        
 
         return $this->render('accii', ['model' => $model, 'now' => $currentDateTime]);
     }
@@ -308,15 +280,10 @@ class SiteController extends Controller
         Yii::$app->params['og_title']['content'] = $model->title;
         Yii::$app->params['og_description']['content'] = $model->text;
         Yii::$app->params['og_url']['content'] = 'https://a410.ru/site/accii-detail?id='.$model->id;
-        Yii::$app->params['og_image']['content'] = 'https://files.a410.ru'.($model->image ? substr($model->image, 6) : '/service/no_photo.jpg');
-
-        // Yii::$app->params['route'] = 'site/accii';
-        // Yii::$app->params['breadcrumbs'] = json_encode(['Акции', $model->title]);
-        // Yii::$app->params['breadcrumbsTitle'] =  $model->start_at;
+        Yii::$app->params['og_image']['content'] = 'https://files.a410.ru'.($model->image ? substr($model->image, 6) : '/service/no_photo.jpg');        
 
         return $this->render('accii-ditail', ['model' => $model]);
     }
-
 
     public function actionSerial()
     {
@@ -383,8 +350,6 @@ class SiteController extends Controller
     public function meta($t, $d, $k, $inclSitename = false)
     {
 
-       //dd(Yii::$app->params);die;
-
        $url     = Yii::$app->request->url;
 
        $sitename = Yii::$app->params['sitename'] . ' ' . Yii::$app->params['geo']->in_city;
@@ -441,9 +406,5 @@ class SiteController extends Controller
                 ['property' => 'og:description', 'content' => $d]
             );
         }
-
-
     }
-
-
 }
