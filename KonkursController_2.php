@@ -37,13 +37,7 @@ class KonkursController extends Controller
     public function actionIndex()
     {
         
-        $this->view->title = "Конкурс";
-
-        //dd($id);die;
-
-        // $accii_id = Yii::$app->request->post('Accii');
-
-        // $id = $accii_id['accii_id'];
+        $this->view->title = "Конкурс";       
 
         $model = new Konkurs;
 
@@ -57,18 +51,7 @@ class KonkursController extends Controller
                 //return $this->redirect('index', ['model' => $model, 'city' => $city, 'id' => $id]);
 
         }    
-
-        // $model->resources = Yii::$app->request->post('resources');
-
-        // if (Yii::$app->request->post()) {
-        //     dd($accii_id['accii_id']);die;
-        // }
-
-        // if($model->validate() && $model->save())
-        //     {                
-                
-        //        dd(Yii::$app->request->post());die;       
-        //     }
+       
 
         return $this->render('index', ['model' => $model, 'city' => $city, 'id' => $id]);
     }
@@ -119,9 +102,7 @@ class KonkursController extends Controller
 
             if(Yii::$app->params['user']->domain != $_SERVER['HTTP_HOST'])
                 return $this->redirect('https://'. Yii::$app->params['user']->domain . $_SERVER['REQUEST_URI']);
-
-            //dd(Yii::$app->controller->action->id);
-
+            
             if(
                 Yii::$app->controller->action->id != 'application' &&
                 Yii::$app->controller->action->id != 'contact' &&
@@ -169,10 +150,7 @@ class KonkursController extends Controller
                     Yii::$app->controller->action->id != 'application'
                 )
                     Yii::$app->session->setFlash('alertPopup', ['status' => 'worning', 'msg' => 'Для работы в системе необходимо указать и подтвердить e-mail!']);
-
             }
-
-
         }
 
         $query = $_SERVER['REQUEST_URI'];
@@ -180,12 +158,6 @@ class KonkursController extends Controller
 
         if(isset($redirectList[$query]))
             Yii::$app->response->redirect('https://' . $_SERVER['HTTP_HOST'] . $redirectList[$query], 301)->send();
-
-
-
-
-
-
         return parent::beforeAction($action);
     }
 }
