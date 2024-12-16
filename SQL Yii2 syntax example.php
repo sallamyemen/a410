@@ -25,8 +25,7 @@
                 $dateQuery->orderBy('created_at');                   
             }
 
-            if (!empty($_SESSION['customer']['filter']['dateFrom']) || !empty($_SESSION['customer']['filter']['dateTo'])) {
-                // $dateQuery = UserA410::find()->select('id');
+            if (!empty($_SESSION['customer']['filter']['dateFrom']) || !empty($_SESSION['customer']['filter']['dateTo'])) {                
                 $dateQuery->select('id');
 
                 if (!empty($_SESSION['customer']['filter']['dateFrom']))
@@ -118,10 +117,8 @@
             $query->orderBy(['user_id' => SORT_DESC]);
 
         if(isset($_SESSION['customer']['sort']) && $_SESSION['customer']['sort'] == 'date_down')
-            $query->orderBy(['user_id' => SORT_ASC]);
-        
-        // if(!isset($_SESSION['customer']['sort']))
-        //         $query->orderBy('second_name');     
+            $query->orderBy(['user_id' => SORT_ASC]);        
+       
 
         $count = $query->count();
         $pages = new Pagination([
